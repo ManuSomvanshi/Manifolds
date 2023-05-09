@@ -1,0 +1,147 @@
+\section{Manifolds}
+\subsection{Basic Definitions}
+\begin{definition}
+  A topological manifold $M$ of dimension $n$ is a Hausdorff topological space with an open covering $ \mathscr{U}$ such that for all $U\in \mathscr{U}$ there exists a homeomorphism $\p_U: U \to \tilde{U} \subset \R^n$.
+\end{definition}
+\begin{definition}
+  The set $\{\p_U\ |\ U\in \mathscr{U}\}$ as defined above is called an atlas. Each element of an atlas is called a chart.
+\end{definition}
+\begin{definition}
+  A topological manifold $M$ is said to be smooth if for any two $U,V\in \mathscr{U}$ with $U\cap V \neq \emptyset$ the map $\p_{UV} \coloneqq \p_U\circ \p_V^{-1}: \p_V(U\cap V) \to \p_U(U\cap V)$ is a diffeomorphism. The atlas is said to be orientable if the Jacobian determinant of $\p_{UV}$ is everywhere positive. An oriented manifold is a smooth manifold with an oriented atlas.
+\end{definition}
+\begin{definition}
+  Let $M$ be a smooth manifold. A continuous function $f:M\to \R$ is said to be smooth if at every $x\in M$ there is some $U\in \mathscr{U}$ containing $x$ such that
+  \begin{align*}
+    f_U = f\circ \phi_U^{-1}
+  \end{align*}
+  is smooth.
+\end{definition}
+\begin{remark}
+  The smoothness of a function is well defined since if $f_U$ is smooth then $f_V$ is also smooth where $V$ is another open set containing $x$. This is becasue
+  \begin{align*}
+    f_V = f\circ \p_V^{-1} = f\circ \phi_U^{-1} \circ \p_U \circ \p_V^{-1} = f_U \circ \p_{UV}.
+  \end{align*}
+\end{remark}
+\begin{definition}
+  Let $M,N$ be smooth manifolds with atlas $\{\p_U\}_{U\in \mathscr{U}}$ and $\{\psi_V\}_{V\in \mathscr{V}}$. A continuous map $f:M\to N$ is said to be smooth if $\psi_V \circ f\circ \p_U^{-1}$ is a smooth map in the usual sense for all $U\in \mathscr{U}$ and $V\in \mathscr{V}$. If the map is invertible and the inverse is smooth then it is called a diffeomorphism.
+\end{definition}
+\begin{definition}
+  A local coordinate system around $x\in M$ is a diffeomorphism from an open neighborhood around $x$ to an open set in $\R^n$.
+\end{definition}
+Unless otherwise stated all manifolds will be assumed to be connected.
+
+\subsection{Tangent Space}
+\begin{definition}
+  If $f:U\to \R^m$ is a smooth function on $\R^n$ then its differential at any point $x\in U$ is a linear map $\dd f_x:\R^n\to \R^m$ whose matrix in the standard basis is given by
+  \begin{align*}
+    \dd f_x = \begin{pmatrix}
+      \pdv{f_1}{x_1}\bigg|_{x} & \pdv{f_1}{x_2}\bigg|_{x} & \cdots & \pdv{f_1}{x_n}\bigg|_{x}\\
+      \cdot & \cdot & \cdots & \cdot\\
+      \cdot & \cdot & \cdots & \cdot\\
+      \cdot & \cdot & \cdots & \cdot\\
+      \pdv{f_m}{x_1}\bigg|_{x} & \pdv{f_m}{x_2}\bigg|_{x} & \cdots & \pdv{f_m}{x_n}\bigg|_{x}
+    \end{pmatrix}
+  \end{align*}
+\end{definition}
+\begin{proposition}[Chain Rule]
+  Let $U \subset \R^n$ and $V\subset \R^m$. The $f:U\to \R^n$ and $g:V\to \R^k$ be smooth maps. Then for every $x\in U\cap f^{-1}(V)$ we have
+  \begin{align*}
+    \dd (g\circ f)_x = \dd g_{f(x)} \circ \dd f_x
+  \end{align*}
+\end{proposition}
+\begin{proof}[proof by Rudin]
+  Let $y = f(x)$, $A = \dd f_x$ and $B = \dd g_{f(x)}$. By definition of the derivative
+  \begin{align*}
+    u(h) = f(x+h) - f(x) - Ah\\
+    v(k) = g(y+k) - g(y) - Bk
+  \end{align*}
+  where $|u(h)/h|, |v(k)/k| \to 0$ as $|h|,|k|\to 0$ respectively. Let $k = f(x+h) - f(x)$, then
+  \begin{align*}
+    |k| = |u(h) + Ah| \leq \l( \bigg|\f{u(h)}{h}\bigg| + \|A\| \r) |h|
+  \end{align*}
+  where $\|A\|$ is the operator norm. Substituting this we get
+  \begin{align*}
+    v(u(h) + Ah) &= g(f(x+h)) - g(f(x)) - B(u(h) + Ah)\\
+                 &= g\circ f(x+h) - g\circ f(x) - BAh - Bu(h)
+  \end{align*}
+  hence
+  \begin{align*}
+    \bigg| \f{g\circ h(x+h) - g\circ f(x) - BAh}{h}\bigg| &= \bigg|\f{v(k) + B u(h)}{h}\bigg|\\
+                                        &\leq \bigg|\f{v(k)}{h}\bigg| + \|B\|\bigg|\f{u(h)}{h}\bigg|\\
+                                        &= \bigg|\f{v(k)}{k}\bigg|\l(\bigg|\f{u(h)}{h}\bigg| + \|A\|\r) + \|B\|\bigg|\f{u(h)}{h}\bigg|\\
+                                        &\rightarrow 0,\ \text{as}\ |h|\to 0
+  \end{align*}
+  Thus the derivatie of $g\circ f$ is $BA$ which was what we had to prove.
+\end{proof}
+\begin{definition}
+  Let $x\in M$ and define $ \mathscr{I}_x = \{U\in \mathscr{U}\ |\ x\in U\}$. Let $\sim_x$ be a relation on $ \mathscr{I}_x\times \R^n$ defined as
+  \begin{align*}
+    (U, u) \sim_x (V,v) \iff u = (\dd \p_{UV})_{\p_V(x)} (v)
+  \end{align*}
+\end{definition}
+\begin{proposition}
+  The relation $\sim_x$ is an equivalence relation.
+\end{proposition}
+\begin{proof}
+  It is reflexive since
+  \begin{align*}
+    \p_{UU} = \text{id} \implies \dd \p_{UU} = I_{n} \implies (\dd \p_{UU})_{\p_U(x)} u = I_n u = u.
+  \end{align*}
+  Symmetry can be proved using the fact that $\dd f^{-1}_x = (\dd f_x)^{-1}$ (which follows from the chain rule), and transitivity also follows from the chain rule.
+\end{proof}
+Consider the space $ \mathscr{I}_x \times \R^n\bign/\sim_x$. Consider any two elements $[(U,u)]$ and $[(V,v)]$. Think of $u,v$ as vectors in $\R^n$ and $(\dd \p_{UV})_{\p_V(x)}$ as an invertible linear transformation on $\R^n$. In a sense the equivalence relation defined above is saying that if the two vectors $u,v$ are related by the change of basis generated by $(\dd \p_{UV})_{\p_V(x)}$ then $(U,u)\sim_x (V,v)$. Given any $[(V,v)]$ and a $U \in \mathscr{I}_x$ one can find a $u'$, given by $u' = (\dd \p_{UV})_{\p_V(x)} v$, such that $[(V,v)] = [(U,u')]$. This motivates a natural definition of addition on the space $ \mathscr{I}_x\times \R^n \bign/\sim_x$ in the following way:
+\begin{align*}
+  [(U,u)] + [(V,v)] = [(U, u+ u')],
+\end{align*}
+where $u'$ is as defined above. This addition is well defined since
+\begin{align*}
+  \p_{UW} = \p_{UV} \circ \p_{VW}.
+\end{align*}
+So if we have $(W,w) \in [(V,v)]$ then
+\begin{align*}
+  (\dd \p_{WU})_{\p_W(x)} w &= (\dd \p_{UV})_{\p_{VW}(\p_W(x))} (\dd \p_{VW})_{\p_W(x)}w\\
+                          &= (\dd \p_{UV})_{\p_V(x)}v = u'.
+\end{align*}
+Also the commutativity follows from the fact that
+\begin{align*}
+  u+u' = (\dd \p_{UV})_{\p_V(x)} \l( (\dd \p_{VU})_{\p_U(x)}u + v\r).
+\end{align*}
+Associativity can also be similarly verified. Similarly in a natural fashion one can define scalar multiplication in the following way:
+\begin{align*}
+  a[(U, u)] = [(U, au)],\ a\in \R.
+\end{align*}
+\begin{proposition}
+  The space $ \mathscr{I}_x \times \R^n\bign/\sim_x$ is an $n-$dimensional vector space.
+\end{proposition}
+\begin{proof}
+  The vector space part should be clear from the above discussion. The zero vector is $[(U, 0)]$ (it's unique cause $(\dd \p_{UV})_{\p_V(x)}$ is a linear transformation). Consider any $[(U, u)]$. Then $u = \sum_{i=1}^n a_i e_i$, where $e_i$ are the standard basis on $\R^n$. Thus it follows that
+  \begin{align*}
+    [(U, u)] = \sum_{i=1}^n a_i [(U, e_i)].
+  \end{align*}
+  Thus the vectors $\{[(U, e_i)]\}$ span the vector space. This is a linearly independent set since
+  \begin{align*}
+    \sum_{i=1}^n a_i [(U, e_i)] &= [(U, 0)]\\
+    \implies [(U,\sum_{i=1}^n a_ie_i)] &= [(U,0)]\\
+    \implies \sum_{i=1}^n a_ie_i) &= 0 \implies a_i = 0\ \forall\ i.
+  \end{align*}
+  Thus $ \mathscr{I}_x \times \R^n \bign/ \sim_x$ is an $n$ dimensional vector space.
+\end{proof}
+\begin{notation}
+  From here on represent the vector space $\mathscr{I}_x \times \R^n \bign/ \sim_x$ by $T_xM$ and the vectors as $X,Y,\cdots$. This space is called the tangent space and the vectors in the space are called tangent vectors at $x$. 
+\end{notation}
+\begin{proposition}
+  Given any $X\in T_xM$ and $U \in \mathscr{I}_x$ then there is a unique $u$ such that $X = [(U,u)]$.
+\end{proposition}
+\begin{proof}
+  Suppose $X = [(U,u)] = [(U, u')]$. Hence
+  \begin{align*}
+    u' = (\dd \p_{UU})_{\p_U(x)} u = I_n u = u.
+  \end{align*}
+  Thus $u$ is unique.
+\end{proof}
+\begin{remark}
+  We think of $X$ as an abstract tangent vector at $x$ and $u$ as it's concrete representation in the chart $\p_U$.
+\end{remark}
+\begin{definition}
+  Define the tangent bundle as the disjoint union $TM = \bigsqcup_{x\in M} T_xM$. Later on we will see that the tangent bundle is a vector bundle, and moreover a smooth manifold of dimension $2n$.
+\end{definition}

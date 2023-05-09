@@ -1,0 +1,82 @@
+\documentclass[11pt,a4paper]{colorart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{latexsym}
+\usepackage{amsfonts,amssymb}
+\usepackage{psfrag}
+\usepackage{ulem}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{physics}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{import, pdfpages, transparent}
+\usepackage{caption, subcaption}
+\usepackage[section]{placeins}
+\usepackage{hyperref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\nn{\nonumber} 
+\def\pa{{\partial}}
+\def\f{\frac}
+\def\l{\left}
+\def\r{\right}
+\def\es{\emptyset}
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\N{\mathbb{N}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\e{\epsilon}
+\def\a{\alpha}
+\def\b{\beta}
+\def\g{\gamma}
+\def\p{\phi}
+\def\d{\delta}
+\def\Ker{\text{Ker}}
+\def\aut{\text{Aut}}
+\def\inn{\text{Inn}}
+\def\Con{\text{Con}}
+\def\Int{\text{Int}}
+\def\char{\text{char}}
+\def\End{\text{End}}
+\def\rank{\text{rank}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\numberwithin{equation}{section} 
+\makeatletter
+\def\bign#1{\mathclose{\hbox{$\left#1\vbox to8.5\p@{}\right.\n@space$}}\mathopen{}}
+\@addtoreset{section}{part}
+\makeatother
+\allowdisplaybreaks
+%\renewcommand*\thesection{\thepart.\arabic{section}}
+%------
+%---tikz environment---
+\usetikzlibrary{arrows}
+%-------
+%---hyperref---
+\renewcommand{\theHsection}{\thepart.section.\thesection}
+%---------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%inkscape diagram settings
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{Figures/}{#2.pdf_tex}
+  }
+
+\pdfsuppresswarningpagegroup=1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\huge Introduction to Kahler Geometry}
+\author{Manvendra Somvanshi} 
+\date{\today} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+\tableofcontents
+% Include source files here
+\include{source/manifolds}
+\end{document}
